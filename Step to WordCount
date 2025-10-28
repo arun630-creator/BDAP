@@ -1,0 +1,19 @@
+step1:Create input.txt
+	echo "Hadoop MapReduce is simple
+Hadoop is powerful
+MapReduce is efficient" > input.txt
+step2:Create input dir
+	hdfs dfs -mkdir /input
+step3:Then upload it to HDFS:
+hdfs dfs -put input.txt /input
+     check:
+hdfs dfs -ls /input
+step4:Create WordCount.java file
+Compile:
+javac -classpath "`hadoop classpath`" -d . WordCount.java
+Create jar:
+jar -cvf wordcount.jar *.class
+Run:
+hadoop jar wordcount.jar WordCount /input /output
+View results:
+hdfs dfs -cat /output/part-r-00000
